@@ -34,18 +34,16 @@ class AachenImages (Dataset):
         return self.imgs[idx]
 
 
-
 class AachenImages_DB (AachenImages):
     """ Only database (db) images.
     """
-    def __init__(self, **kw):
-        AachenImages.__init__(self, select='db', **kw)
+    def __init__(self, root='data/aachen', **kw):
+        AachenImages.__init__(self, select='db', root=root, **kw)
         self.db_image_idxs = {self.get_tag(i) : i for i,f in enumerate(self.imgs)}
     
     def get_tag(self, idx): 
         # returns image tag == img number (name)
         return os.path.split( self.imgs[idx][:-4] )[1]
-
 
 
 class AachenPairs_StyleTransferDayNight (AachenImages_DB, StillPairDataset):
@@ -54,7 +52,8 @@ class AachenPairs_StyleTransferDayNight (AachenImages_DB, StillPairDataset):
     """
     def __init__(self, root='data/aachen/style_transfer', **kw):
         StillPairDataset.__init__(self)
-        AachenImages_DB.__init__(self, **kw)
+        db_root = os.path.dirname(os.path.normpath(root))
+        AachenImages_DB.__init__(self, root=db_root, **kw)
         old_root = os.path.join(self.root, self.img_dir)
         self.root = os.path.commonprefix((old_root, root))
         self.img_dir = ''
@@ -73,13 +72,13 @@ class AachenPairs_StyleTransferDayNight (AachenImages_DB, StillPairDataset):
         assert self.nimg and self.npairs
 
 
-
 class AachenPairs_OpticalFlow (AachenImages_DB, PairDataset):
     """ Image pairs from Aachen db with optical flow.
     """
     def __init__(self, root='data/aachen/optical_flow', **kw):
         PairDataset.__init__(self)
-        AachenImages_DB.__init__(self, **kw)
+        db_root = os.path.dirname(os.path.normpath(root))
+        AachenImages_DB.__init__(self, root=db_root, **kw)
         self.root_flow = root
 
         # find out the subsest of valid pairs from the list of flow files
@@ -135,8 +134,6 @@ class AachenPairs_OpticalFlow (AachenImages_DB, PairDataset):
             meta['mask'] = mask
         
         return img1, img2, meta
-
-
 
 
 if __name__ == '__main__':

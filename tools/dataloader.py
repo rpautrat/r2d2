@@ -9,8 +9,8 @@ import numpy as np
 import torch
 import torchvision.transforms as tvf
 
-from tools.transforms import instanciate_transformation
-from tools.transforms_tools import persp_apply
+from .transforms import instanciate_transformation
+from .transforms_tools import persp_apply
 
 
 RGB_mean = [0.485, 0.456, 0.406]
