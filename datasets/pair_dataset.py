@@ -7,8 +7,8 @@ import numpy as np
 from PIL import Image
 
 from .dataset import Dataset, CatDataset
-from r2d2.tools.transforms import instanciate_transformation
-from r2d2.tools.transforms_tools import persp_apply
+from ..tools.transforms import instanciate_transformation
+from ..tools.transforms_tools import persp_apply
 
 
 class PairDataset (Dataset):

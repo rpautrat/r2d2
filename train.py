@@ -6,10 +6,10 @@ import os, pdb
 import torch
 import torch.optim as optim
 
-from r2d2.tools import common, trainer
-from r2d2.tools.dataloader import *
-from r2d2.nets.patchnet import *
-from r2d2.nets.losses import *
+from .r2d2.tools import common, trainer
+from .r2d2.tools.dataloader import *
+from .r2d2.nets.patchnet import *
+from .r2d2.nets.losses import *
 
 default_net = "Quad_L2Net_ConfCFS()"
 
