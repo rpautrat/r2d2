@@ -8,9 +8,9 @@ from PIL import Image
 import numpy as np
 import torch
 
-from .r2d2.tools import common
-from .r2d2.tools.dataloader import norm_RGB
-from .r2d2.nets.patchnet import *
+from .tools import common
+from .tools.dataloader import norm_RGB
+from .nets.patchnet import *
 
 
 def load_network(model_fn): 
